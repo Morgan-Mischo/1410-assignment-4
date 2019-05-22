@@ -1,0 +1,138 @@
+package loops;
+
+import java.util.Scanner;
+
+public class Loops
+{
+    public static boolean containsToken (String s, String t) {
+        
+        /** Returns a boolean
+        if t is a token within s, return true
+        Use a scanner to break s into tokens
+        use a searching loop to look for t
+         * 
+         */
+        
+        Scanner scn = new Scanner(s); 
+        String sToken = ""; 
+        
+        while (scn.hasNext()) { //While loop that scans the next token in the s string
+           sToken = scn.next(); //Assigns "tokenOfS" to next token in s string
+            
+            if (sToken.equals(t)) { //If token in t string = token in s string, return true. else return false
+                scn.close(); //close scanner
+                return true; 
+            } 
+        }
+        return false; 
+
+    }
+    public static String findLineWithToken (Scanner scn, String t) {
+        /**Returns a String
+        Returns a line from scn that contains t as a token
+        Returns an empty string otherwise
+        containsToken will be helpful
+         * 
+         */
+        
+        String line = ""; //Initializing new string
+        while (scn.hasNextLine()) { //While the scanner goes through
+            line = scn.nextLine(); //Scanner is equal to the next string
+            
+            if (containsToken (line, t)) { //if it contains t
+                return line; //return line
+            }
+        }
+        return "";
+        
+    }
+    public static boolean isPalindrome(String s) {
+        /**returns a boolean
+        true if s reads the same forwards and backwards
+        Use a loop that searches for a character in s that doesn't match up with an identical character elsewhere in string
+         * 
+         */
+        
+        boolean isTrue = true; //initializing boolean
+        
+        for (int i = 0; i < s.length(); i++) { //for loop so it stays within the length of string s
+            if (s.charAt(i) != s.charAt(s.length()-i -1)){ //if the character at i doesn't equal the character at the end
+                isTrue = false; //return false
+                break; //leave the loop
+                    
+            }
+        }
+        return isTrue; //return boolean
+
+    }
+    public static String findLongestPalindrome(Scanner scn) {
+        /**returns a String
+        returns the longest token from scn that is a palindrome
+        Calls for an optimization loop
+        isPalindrome method is helpful
+         * 
+         */
+        
+       String s = scn.nextLine(); //String that is string in the scanner
+       int i = 0; //initializing int i
+       int largestSoFar = s.length(); //initializing int largestSoFAr
+       
+       String newString = "";  //initializing newString
+       int nextPossible = m.length(); //initializing int nextPossible
+       
+       boolean isTrue = isPalindrome(s); //initializing boolean
+       
+       while (scn.hasNextLine()) { //while statement, keeping it within the parameters of the scanner length
+           if (isTrue = true) { //if it is a palindrome
+               largestSoFar = Math.max(largestSoFar, largestSoFar); //largestSoFar = whichever is larger
+              newString = s; //newString is assigned whichever s is longer
+               
+           }
+           else {
+               largestSoFar = nextPossible; //or largest so far equals the next one
+               newString = s; //newString is assigned whichever s is longer
+           }
+       }
+        
+return newString; 
+       
+    }
+    public static int findMostWhitespace(Scanner scn) {
+        return 0;
+        /**returns an int
+        //finds the line in scn with the most whitespace characters and returns number of characters
+        //calls for an optimization loop
+        //Character.is.Whitespace() will be useful
+         * 
+         */
+        int m = 0; 
+        int n = 0; 
+        
+        String t = scn.nextLine(); 
+        String p = ""; 
+        
+        while (scn.hasNext())
+        {
+            p = scn.nextLine(); 
+            
+            if (Character.isWhitespace(t)) 
+            {
+                m++; 
+            }
+            if (Character.isWhitespace(p))
+            {
+                n++;
+            }
+            if (n > m)
+            {
+                return n; 
+                
+                }
+            else {
+                return m; 
+            }
+        }
+    }
+    
+
+}
