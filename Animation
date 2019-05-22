@@ -1,0 +1,121 @@
+package animation;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+public class Animation
+{
+    /** Interval in msec to work with */
+    private final static int INTERVAL = 2500;
+
+    /** Velocity */
+    private final static int V = 2; 
+
+    /** Font size of the title */
+    private final static int FONT_SIZE = 24;
+    
+    /** Font color of the title */
+    private final static Color fontColor = Color.BLACK; 
+    
+    /** x coordinate of rectangle */
+    private static int rX = 800; 
+    
+    /** x coordinate of ball */
+    private static int bX = 100; 
+    
+    /** color of ball */
+    private static Color bColor = Color.RED; 
+    
+    /** color of rectangle */
+    private static Color rColor = Color.BLUE; 
+    
+    /** radius of ball */
+    private static int radius = 45; 
+
+    /** Name to display in title bar */
+    public final static String STUDENT_NAME = "Morgan Mischo";  // PUT YOUR NAME HERE!!!
+
+    /**
+     * This is the method that you need to rewrite to create a custom animation. This method is called repeatedly as the
+     * animation proceeds. It needs to draw on g how the animation should look after time milliseconds have passed.
+     * 
+     * The method returns true if the end of the animation has been reached or false if the animation should continue.
+     * 
+     * @param g    Graphics object on which to draw
+     * @param time Number of milliseconds that have passed since animation started
+     * @param height Current height of the frame
+     * @param width Current width of the frame
+     */
+    /**
+     * Draws the ball as it would appear at any given time. 
+     */
+    
+    
+    public static boolean paintFrame (Graphics2D g, int time, int height, int width)
+    {
+        if (time >= 0) { //if the time has begun
+        drawBall (g, time, 250);//draw my ball, make it blue
+        drawRectangle (g, time, 200, 150, 100); //draw my rectangle, make it red
+        }
+        
+        if (time < 5650) { //once the time starts
+            bX = bX + V; //ball starts moving to the left
+            rX = rX - V; //rectangle starts moving to the right
+            drawTitle(g, "2016. The election between Clinton and Trump. Both are racing to get enough votes."); //Telling the story
+        }
+        
+        if (time >= 5650) { //once both objects reach the middle
+            bColor = Color.GREEN; // ball color changes to green
+            rColor = Color.GREEN; //rectangle color changes to green
+            
+            bX = bX - V; //ball begins moving to the right
+            rX = rX + V; //ball begins moving to the left
+            
+            radius = radius + 1; //radius increases so ball will expand
+           
+            drawTitle(g, "Both sides become greedy. Trump wins. The Republican party grows. What will happen?"); //Telling the story
+            
+        }
+        
+        
+        //Stop the animation if it has run long enough
+       return time >= 5.5 * INTERVAL;  
+    }
+
+    public static void drawBall (Graphics2D g, double time, int bY)
+{
+   
+        int diameter = radius * 2; //creates the diameter for the ball
+        
+        g.setColor(bColor); //creating a color for the ball
+        
+        g.fillOval (bX - radius, bY - radius, diameter, diameter); //actually draws the ball
+}
+
+
+    /**
+ 
+* Draws the rectangle as it would appear at the given time. 
+ */
+public static void drawRectangle (Graphics g, double time, int rY, int rWidth, int rHeight) {
+   
+    g.setColor(rColor); //sets the color for the ball
+    
+    g.fillRect (rX, rY, rWidth, rHeight); //creating a color for the ball
+}
+/**
+ * Draws the title in the upper-left corner
+ */
+
+public static void drawTitle (Graphics2D g, String title)
+{
+    // Use a larger than default font for the title
+    Font f = g.getFont();
+    g.setColor(fontColor);
+    g.setFont(new Font(f.getName(), f.getStyle(), FONT_SIZE));
+    g.drawString(title, FONT_SIZE, FONT_SIZE);
+}
+
+}
